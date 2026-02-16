@@ -1,9 +1,18 @@
 from requests import put
 
-response = put('http://localhost:5002/dateslash', data={'date': '02202025'})
-status = response.status_code
-data = response.json()
-if status == 200:
-    print(data['date_slash'])
+date_input = '02202025'
+
+date_response = put('http://localhost:5002/dateslash', data={'date': date_input})
+day_response  = put('http://localhost:5002/dayofweek', data={'date': date_input})
+
+# Date (Slash Format)
+if date_response.status_code == 200:
+    print("Slash format:", date_response.json()['date_slash'])
 else:
-    print("An error occurred: ", data['error'])
+    print("Slash error:", date_response.json()['error'])
+
+# Day of the week
+if day_response.status_code == 200:
+    print("Day of week:", day_response.json()['day_of_week'])
+else:
+    print("Day error:", day_response.json()['error'])
