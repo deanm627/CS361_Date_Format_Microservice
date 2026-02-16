@@ -24,6 +24,10 @@ def validate_date(date_str):
     return True, {'date_month': date_month, 'date_day': date_day, 'date_year': date_year}
 
 class DateSlash(Resource):
+    """
+    Gets date from request in format MMDDYYYY, uses helper function
+    to validate the date, then returns date in format MM/DD/YYYY
+    """
     def put(self):
         # Get date string from the request
         date = request.form['date']
