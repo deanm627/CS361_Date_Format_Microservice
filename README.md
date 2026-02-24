@@ -1,4 +1,4 @@
-# Date Format Microservice (Flask REST)
+# Date Format Microservice
 
 A REST API based microservice that accepts a date in **MMDDYYYY** format and returns:
 1) The same date in **MM/DD/YYYY** format, and/or  
@@ -6,7 +6,6 @@ A REST API based microservice that accepts a date in **MMDDYYYY** format and ret
 
 It performs input validation (digits only, correct length, valid month/day/year range, and real calendar date including leap years).
 
----
 
 ## Requirements
 - Python 3.9+
@@ -62,18 +61,17 @@ print(response.json())
 ### Example Response
 
 ```python
-if slash_response.status_code == 200:
-    print("Slash format:", slash_response.json()["date_slash"])
+if date_response.status_code == 200:
+    print("Slash format:", date_response.json()["date_slash"])
 else:
-    print("Error:", slash_response.json()["error"])
+    print("Error:", date_response.json()["error"])
 
 if dow_response.status_code == 200:
-    print("Day of week:", dow_response.json()["day_of_week"])
+    print("Day of week:", day_response.json()["day_of_week"])
 else:
-    print("Error:", dow_response.json()["error"])
+    print("Error:", day_response.json()["error"])
 ```
 
----
 
 # Running the Microservice
 
@@ -94,9 +92,7 @@ The service will auto start on:
 http://localhost:5002
 
 
----
-
-# Example Client
+## Example Client
 
 Run the provided client:
 
@@ -104,6 +100,9 @@ Run the provided client:
 python date_format_client.py
 ```
 
----
 
-# UML
+# UML Sequence Diagram
+
+![Date Format Microservice Sequence Diagram](docs/uml_sequence_diagram.png)
+
+Figure 1: UML sequence diagram showing request and response flow for both endpoints
