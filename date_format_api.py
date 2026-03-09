@@ -6,22 +6,16 @@ app = Flask(__name__)
 api = Api(app)
 
 def validate_date(date_str):
-
-    # Check that date is digit
     if not date_str.isdigit():
         return False, {'error': 'Date must contain only digits (MMDDYYYY).'}
-    # Check that date is correct length
     if len(date_str) != 8:
         return False, {'error': 'Date is incorrect length.'}
-    # Check that month is valid
     date_month = date_str[:2]
     if not '01' <= date_month <= '12':
         return False, {'error': 'Month is invalid.'}
-    # Check that day is valid
     date_day = date_str[2:4]
     if not '01' <= date_day <= '31':
         return False, {'error': 'Day is invalid.'}
-    # Check that year is valid
     date_year = date_str[4:]
     if not '1900' <= date_year <= '2026':
         return False, {'error': 'Year is invalid.'}
@@ -31,7 +25,6 @@ def validate_date(date_str):
         weekday = datetime.strptime(date_str, "%m%d%Y")
     except ValueError:
         return False, {'error': 'Date is not a real calendar date.'}
-
 
     # Date is valid, return parsed date
     return True, {
@@ -47,7 +40,6 @@ class DateSlash(Resource):
     to validate the date, then returns date in format MM/DD/YYYY
     """
     def put(self):
-        # Get date string from the request
         date = request.form['date']
         # Validate the date that was sent
         validate_result, validate_msg = validate_date(date)
@@ -60,7 +52,6 @@ class DateSlash(Resource):
 
 class DayOfWeek(Resource):
     def put(self):
-        # Get date string from the request
         date = request.form['date']
         # Validate the date
         validate_result, validate_msg = validate_date(date)
